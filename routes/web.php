@@ -1,25 +1,30 @@
 <?php
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\PostsController;
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+use App\Http\Controllers\HomeController;
 
-Route::get('/', [PagesController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+use App\Http\Controllers\PostController;
 
-Route::resource('/blog', PostsController::class);
+Route::get('/news', [PostController::class, 'index'])->name('posts.index');
+Route::get('/news/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/news/create', [PostController::class, 'create'])->middleware('auth')->name('posts.create');
+Route::post('/news', [PostController::class, 'store'])->middleware('auth')->name('posts.store');
+Route::get('/news/{id}/edit', [PostController::class, 'edit'])->middleware('auth')->name('posts.edit');
+Route::put('/news/{id}', [PostController::class, 'update'])->middleware('auth')->name('posts.update');
+Route::delete('/news/{id}', [PostController::class, 'destroy'])->middleware('auth')->name('posts.destroy');
+use App\Http\Controllers\TeamController;
 
-Auth::routes();
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+use App\Http\Controllers\MatchController;
 
+Route::get('/fixtures', [MatchController::class, 'index'])->name('matches.index');
