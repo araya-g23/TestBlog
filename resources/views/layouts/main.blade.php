@@ -8,12 +8,13 @@
 </head>
 <body>
 <nav>
-    <a href="/">Home</a>
-    <a href="/news">News</a>
-    <a href="/teams">Teams</a>
-    <a href="/fixtures">Fixtures</a>
-    <a href="/contact">Contact</a>
+    <a href="{{ route('home') }}">Home</a>
+    <a href="{{ route('posts.index') }}">News</a>
+    <a href="{{ route('teams.index') }}">Teams</a>
+    <a href="{{ route('matches.index') }}">Fixtures</a>
+    <a href="{{ route('contact.show') }}">Contact</a>
 </nav>
+
 
 <div class="content">
     @yield('content')

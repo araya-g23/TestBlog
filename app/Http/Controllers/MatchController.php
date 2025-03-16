@@ -1,11 +1,15 @@
 <?php
-use App\Models\FootballMatch; // Use new model name
+
+namespace App\Http\Controllers;
+
+use App\Models\FootballMatch;  // Ensure this is correct
+use App\Http\Controllers\Controller; // ✅ Add this import
 
 class MatchController extends Controller
 {
     public function index()
     {
-        $matches = FootballMatch::latest()->get(); // Use new model name
+        $matches = FootballMatch::latest()->get();  // Ensure this model exists
         return view('pages.fixtures', compact('matches'));
     }
 }

@@ -9,6 +9,8 @@ class FootballMatch extends Model
 {
     use HasFactory;
 
+    protected $table = 'matches';  // ✅ Fix: Explicitly define table name
+
     protected $fillable = ['home_team_id', 'away_team_id', 'date', 'result'];
 
     public function homeTeam()

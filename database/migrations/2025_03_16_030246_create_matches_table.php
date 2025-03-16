@@ -24,6 +24,7 @@ class CreateMatchesTable extends Migration
     }
 
 
+
     /**
      * Reverse the migrations.
      *
