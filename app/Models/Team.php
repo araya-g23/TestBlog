@@ -13,7 +13,7 @@ class Team extends Model
 
     public function matches()
     {
-        return $this->hasMany(Match::class);
+        return $this->hasMany(FootballMatch::class);
     }
 }
 

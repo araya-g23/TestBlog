@@ -28,3 +28,13 @@ Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');
 use App\Http\Controllers\MatchController;
 
 Route::get('/fixtures', [MatchController::class, 'index'])->name('matches.index');
+use Illuminate\Support\Facades\Auth;
+
+Auth::routes(); // This adds login, register, logout routes automatically
+use App\Http\Controllers\CommentController;
+
+Route::post('/comments/{post_id}', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+use App\Http\Controllers\ContactController;
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');

@@ -3,7 +3,7 @@
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Team;
-use App\Models\Match;
+use App\Models\FootballMatch;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
     // Show all blog posts
     public function index()
     {
@@ -77,4 +78,5 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
+
 }
