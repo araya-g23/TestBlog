@@ -26,25 +26,28 @@ class PostController extends Controller
     // Show the form to create a new post
     public function create()
     {
-        return view('blog.create');
+        $categories = Category::all();
+        return view('blog.create', compact('categories'));
     }
 
-    // Store a new post
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'category_id' => 'required',
         ]);
 
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
+
 
     // Show the form to edit a post
     public function edit($id)
