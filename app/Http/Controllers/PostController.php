@@ -1,85 +1,98 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
 
-    // Show all blog posts
+    // Show All Posts
     public function index()
     {
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::latest()->get();
         return view('blog.index', compact('posts'));
     }
 
-    // Show a single blog post
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-        return view('blog.show', compact('post'));
-    }
-
-    // Show the form to create a new post
+    // Show Create Post Form
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::whereIn('name', ['Transfers', 'Match Reports'])->get();
         return view('blog.create', compact('categories'));
     }
 
+    // Store a New Post
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
+        }
 
         Post::create([
             'title' => $request->title,
-            'content' => $request->content,
+            'content' => $request->description,
             'category_id' => $request->category_id,
             'user_id' => auth()->id(),
+            'image' => $imagePath,
         ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
-
-    // Show the form to edit a post
-    public function edit($id)
+    // Show a Single Post
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
-        return view('blog.edit', compact('post'));
+        return view('blog.show', compact('post'));
     }
 
-    // Update a post
-    public function update(Request $request, $id)
+    // Edit Post
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
+        $categories = Category::whereIn('name', ['Transfers', 'Match Reports'])->get();
+        return view('blog.edit', compact('post', 'categories'));
+    }
 
+    // Update Post
+    public function update(Request $request, Post $post)
+    {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
+            $post->image = $imagePath;
+        }
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
+        $post->title = $request->title;
+        $post->content = $request->description;
+        $post->category_id = $request->category_id;
+        $post->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
     }
 
-    // Delete a post
-    public function destroy($id)
+    // Delete Post
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+        return redirect()->route('posts.index')->with('success', 'Post deleted.');
     }
-
 }

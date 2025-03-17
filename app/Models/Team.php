@@ -9,11 +9,17 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'logo', 'stadium'];
+    protected $fillable = ['name', 'stadium', 'logo', 'coach', 'founded'];
 
-    public function matches()
-    {
-        return $this->hasMany(FootballMatch::class);
-    }
+    // Define relationship with players (assuming a Player model exists)
+//    public function players()
+//    {
+//        return $this->hasMany(Player::class);
+//    }
+//
+//    // Define relationship with matches (assuming a Match model exists)
+//    public function matches()
+//    {
+//        return $this->hasMany(Match::class);
+//    }
 }
-

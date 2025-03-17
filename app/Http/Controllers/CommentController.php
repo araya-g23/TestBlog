@@ -11,15 +11,18 @@ class CommentController extends Controller
     public function store(Request $request, $post_id)
     {
         $request->validate([
-            'content' => 'required|min:3',
+            'content' => 'required|string',
         ]);
 
         Comment::create([
-            'post_id' => $post_id,
-            'user_id' => Auth::id(),
+            'post_id' => $post_id, // Make sure $post_id is correctly passed here
+            'user_id' => auth()->id(),
             'content' => $request->content,
         ]);
 
-        return redirect()->route('posts.show', $post_id)->with('success', 'Comment added successfully!');
+        return redirect()->back()->with('success', 'Comment added successfully.');
     }
+
+
+
 }

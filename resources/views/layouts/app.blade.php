@@ -39,6 +39,10 @@
                        class="no-underline hover:underline"
                        onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    @if(Auth::check())
+                        <li><a href="{{ route('posts.create') }}" class="hover:underline text-green-400">Create Post</a></li>
+                    @endif
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         {{ csrf_field() }}
                     </form>
