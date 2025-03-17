@@ -48,3 +48,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 });
 
+use Illuminate\Support\Facades\Route;
+
+
+Route::get('/dashboard', function () {
+    $user = Auth::user(); // Get logged-in user
+    return view('dashboard', compact('user'));
+})->name('dashboard')->middleware('auth');

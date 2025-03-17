@@ -1,7 +1,8 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -12,9 +13,10 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'content' => $this->faker->paragraphs(3, true),
-            'image' => 'default.jpg',
-            'user_id' => User::factory(),
+            'content' => $this->faker->paragraph,
+            'user_id' => 1, // Update with a dynamic user ID
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

@@ -4,39 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Blog</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js for interactive dropdowns -->
+    <script src="https://unpkg.com/alpinejs@3.5.2/dist/cdn.min.js" defer></script>
+
 </head>
-<body>
+<body class="bg-gray-100 text-gray-900">
+
+<!-- Navbar -->
 <nav class="bg-black text-white p-4">
-    <ul class="flex space-x-6">
-        <li><a href="{{ route('home') }}">Home</a></li>
+    <ul class="flex justify-between items-center">
+        <div class="flex space-x-6">
+            <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
 
-        <!-- Dropdown for News -->
-        <li class="relative group">
-            <a href="#" class="hover:underline">News ▾</a>
-            <ul class="absolute hidden bg-black text-white group-hover:block">
-                @foreach(\App\Models\Category::whereIn('name', ['Transfers', 'Match Reports'])->get() as $category)
-                    <li><a href="{{ route('categories.show', $category->id) }}" class="block px-4 py-2 hover:bg-gray-700">{{ $category->name }}</a></li>
-                @endforeach
-            </ul>
-        </li>
+            <!-- Dropdown for News -->
+            <li class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="hover:underline focus:outline-none">News ▾</button>
+                <ul x-show="open" x-transition @click.away="open = false"
+                    class="absolute left-0 mt-2 w-48 bg-black text-white shadow-lg rounded z-50">
+                    @foreach(\App\Models\Category::whereIn('name', ['Transfers', 'Match Reports'])->get() as $category)
+                        <li>
+                            <a href="{{ route('categories.show', $category->id) }}"
+                               class="block px-4 py-2 hover:bg-gray-700">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
 
+            <li><a href="{{ route('teams.index') }}" class="hover:underline">Teams</a></li>
+            <li><a href="{{ route('matches.index') }}" class="hover:underline">Fixtures</a></li>
+            <li><a href="{{ route('contact.show') }}" class="hover:underline">Contact</a></li>
+        </div>
 
-        <li><a href="{{ route('teams.index') }}">Teams</a></li>
-        <li><a href="{{ route('matches.index') }}">Fixtures</a></li>
-        <li><a href="{{ route('contact.show') }}">Contact</a></li>
+        <!-- Authentication Links -->
+        <div class="flex space-x-6">
+            @guest
+                <li><a href="{{ route('login') }}" class="hover:underline">Login</a></li>
+                <li><a href="{{ route('register') }}" class="hover:underline">Register</a></li>
+            @else
+                <li><a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="hover:underline">Logout</button>
+                    </form>
+                </li>
+            @endguest
+        </div>
     </ul>
 </nav>
 
-
-
-
-<div class="content">
+<!-- Main Content -->
+<div class="container mx-auto p-6">
     @yield('content')
 </div>
 
-<footer>
+<!-- Footer -->
+<footer class="text-center p-4 mt-6 bg-black text-white">
     <p>&copy; 2025 Football Blog</p>
 </footer>
+
 </body>
 </html>
