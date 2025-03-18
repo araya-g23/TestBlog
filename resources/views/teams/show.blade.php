@@ -24,7 +24,6 @@
                 @endforelse
             </ul>
 
-            <!-- Matches Section -->
             <h2 class="text-2xl font-semibold mt-6">Recent Matches</h2>
             <table class="min-w-full bg-white shadow-md rounded mt-4">
                 <thead>
