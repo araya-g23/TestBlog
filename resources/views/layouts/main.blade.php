@@ -17,24 +17,36 @@
 <nav class="bg-black text-white p-4">
     <ul class="flex justify-between items-center">
         <div class="flex space-x-6">
+            <!-- Home Link -->
             <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
 
-            <!-- Dropdown for News -->
+            <!-- News Dropdown -->
             <li class="relative" x-data="{ open: false }">
                 <button @click="open = !open" class="hover:underline focus:outline-none">News ▾</button>
                 <ul x-show="open" x-transition @click.away="open = false"
                     class="absolute left-0 mt-2 w-48 bg-black text-white shadow-lg rounded z-50">
-                    @foreach(\App\Models\Category::whereIn('name', ['Transfers', 'Match Reports'])->get() as $category)
-                        <li>
-                            <a href="{{ route('categories.show', $category->id) }}"
-                               class="block px-4 py-2 hover:bg-gray-700">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                    @endforeach
+                    <!-- All News -->
+                    <li>
+                        <a href="{{ route('posts.index') }}" class="block px-4 py-2 hover:bg-gray-700">
+                            All News
+                        </a>
+                    </li>
+                    <!-- Transfers -->
+                    <li>
+                        <a href="{{ route('categories.show', ['category' => 'transfers']) }}" class="block px-4 py-2 hover:bg-gray-700">
+                            Transfers
+                        </a>
+                    </li>
+                    <!-- Match Reports -->
+                    <li>
+                        <a href="{{ route('categories.show', ['category' => 'match-reports']) }}" class="block px-4 py-2 hover:bg-gray-700">
+                            Match Reports
+                        </a>
+                    </li>
                 </ul>
             </li>
 
+            <!-- Other Links -->
             <li><a href="{{ route('teams.index') }}" class="hover:underline">Teams</a></li>
             <li><a href="{{ route('matches.index') }}" class="hover:underline">Fixtures</a></li>
             <li><a href="{{ route('contact.show') }}" class="hover:underline">Contact</a></li>

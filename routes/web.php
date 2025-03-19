@@ -91,3 +91,10 @@ Route::get('/fixtures', [MatchController::class, 'index'])->name('matches.index'
  */
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+
+// All News
+Route::get('/news', [PostController::class, 'index'])->name('posts.index');
+
+// News by Category
+Route::get('/news/category/{category}', [PostController::class, 'showByCategory'])->name('categories.show');

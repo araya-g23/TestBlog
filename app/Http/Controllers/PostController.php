@@ -95,4 +95,11 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted.');
     }
+    // dropdown list categories
+    public function showByCategory($category)
+    {
+        $category = Category::where('name', $category)->firstOrFail();
+        $posts = $category->posts()->latest()->get();
+        return view('posts.index', compact('posts', 'category'));
+    }
 }

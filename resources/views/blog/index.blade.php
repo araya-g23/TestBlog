@@ -1,16 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-4">Latest News</h2>
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6">{{ $category ? $category->name : 'All' }} News</h1>
 
-        @foreach($posts as $post)
-            <div class="border-b pb-4 mb-4">
-                <h3 class="text-lg font-bold">
-                    <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
-                </h3>
-                <p class="text-sm text-gray-500">By {{ $post->user->name }} | {{ $post->category->name }}</p>
-                <p class="mt-2">{{ Str::limit($post->content, 150) }}</p>
+        @foreach ($posts as $post)
+            <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+                <h2 class="text-xl font-bold">{{ $post->title }}</h2>
+                <p class="text-gray-700">{{ $post->content }}</p>
+                <p class="text-sm text-gray-500">Posted on {{ $post->created_at->format('M d, Y') }}</p>
             </div>
         @endforeach
     </div>
