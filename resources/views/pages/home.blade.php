@@ -10,7 +10,9 @@
             <h2>🔥 Latest News</h2>
             @foreach($posts as $post)
                 <article>
-                    <h3><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h3>
+                    <h3>
+                        <a href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a>
+                    </h3>
                     <p>{{ Str::limit($post->content, 100) }}...</p>
                 </article>
             @endforeach
