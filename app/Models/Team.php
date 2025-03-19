@@ -9,8 +9,9 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'stadium', 'logo', 'coach', 'founded'];
-
+    protected $fillable = [
+        'name', 'stadium', 'coach', 'founded', 'logo',
+    ];
     // Define relationship with players (assuming a Player model exists)
 //    public function players()
 //    {

@@ -10,7 +10,6 @@
 
     <!-- Alpine.js for interactive dropdowns -->
     <script src="https://unpkg.com/alpinejs@3.5.2/dist/cdn.min.js" defer></script>
-
 </head>
 <body class="bg-gray-100 text-gray-900">
 

@@ -7,9 +7,24 @@ use App\Models\Team;
 
 class TeamController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $teams = Team::all();
+        // Search Query
+        $search = $request->query('search');
+
+        // Sorting
+        $sort = $request->query('sort', 'name'); // Default sort by 'name'
+        $direction = $request->query('direction', 'asc'); // Default direction 'asc'
+
+        // Query Teams with search and sorting
+        $teams = Team::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                ->orWhere('stadium', 'like', "%{$search}%")
+                ->orWhere('coach', 'like', "%{$search}%");
+        })
+            ->orderBy($sort, $direction)
+            ->paginate(10); // Paginate with 10 items per page
+
         return view('teams.index', compact('teams'));
     }
 
