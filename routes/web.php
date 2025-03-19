@@ -50,6 +50,7 @@ Route::get('/blog/{post}', [PostsController::class, 'show'])->name('blog.show');
 Route::get('/blog/{post}/edit', [PostsController::class, 'edit'])->name('blog.edit');
 Route::put('/blog/{post}', [PostsController::class, 'update'])->name('blog.update');
 Route::delete('/blog/{post}', [PostsController::class, 'destroy'])->name('blog.destroy');
+Route::get('/blog', [PostsController::class, 'allNews'])->name('blog.index');
 
 /**
  * 🔹 Comments Routes

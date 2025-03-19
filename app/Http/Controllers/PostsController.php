@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\Match;
+use App\Models\Team;
 
 class PostsController extends Controller
 {
@@ -15,7 +17,15 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->take(3)->get(); // Get latest 3 posts
+//        $matches = Match::orderBy('date', 'asc')->take(5)->get(); // Get upcoming matches
+//        $teams = Team::all(); // Get all teams
+        return view('home', compact('posts'));
+    }
+
+    public function allNews()
+    {
+        $posts = Post::latest()->paginate(10); // Get all posts with pagination
         return view('blog.index', compact('posts'));
     }
 
@@ -32,9 +42,10 @@ class PostsController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads', 'public');
+            $imagePath = $request->file('image')->store('uploads', 'public'); // Saves in storage/app/public/uploads
+        } else {
+            $imagePath = null;
         }
 
         Post::create([

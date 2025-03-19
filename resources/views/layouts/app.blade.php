@@ -17,47 +17,49 @@
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
 <div id="app">
-    <header class="bg-gray-800 py-6">
-        <div class="container mx-auto flex justify-between items-center px-6">
-            <div>
-                <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+
+    <!-- ✅ Updated Navbar (Matches Other Pages) -->
+    <nav class="bg-black text-white p-4">
+        <ul class="flex justify-between items-center">
+            <div class="flex space-x-6">
+                <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
+                <li><a href="{{ route('blog.index') }}" class="hover:underline">All News</a></li>
+                <li><a href="{{ route('teams.index') }}" class="hover:underline">Teams</a></li>
+                <li><a href="{{ route('matches.index') }}" class="hover:underline">Fixtures</a></li>
+                <li><a href="{{ route('contact.show') }}" class="hover:underline">Contact</a></li>
+
+                @if(Auth::check())
+                    <li><a href="{{ route('blog.create') }}" class="hover:underline text-green-400">Create Post</a></li>
+                @endif
             </div>
-            <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
-                <a class="no-underline hover:underline" href="/">Home</a>
-                <a class="no-underline hover:underline" href="/blog">Blog</a>
+
+            <div class="flex space-x-6">
                 @guest
-                    <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    @if (Route::has('register'))
-                        <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @endif
+                    <li><a href="{{ route('login') }}" class="hover:underline">Login</a></li>
+                    <li><a href="{{ route('register') }}" class="hover:underline">Register</a></li>
                 @else
-                    <span>{{ Auth::user()->name }}</span>
-
-                    <a href="{{ route('logout') }}"
-                       class="no-underline hover:underline"
-                       onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                    @if(Auth::check())
-                        <li><a href="{{ route('posts.create') }}" class="hover:underline text-green-400">Create Post</a></li>
-                    @endif
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                        {{ csrf_field() }}
-                    </form>
+                    <li><a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="hover:underline">Logout</button>
+                        </form>
+                    </li>
                 @endguest
-            </nav>
-        </div>
-    </header>
+            </div>
+        </ul>
+    </nav>
 
-    <div>
+    <!-- ✅ Keeps Login Page Design -->
+    <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
         @yield('content')
-    </div>
+    </main>
 
-    <div>
-        @include('layouts.footer')
-    </div>
+    <!-- ✅ Updated Footer -->
+    <footer class="text-center p-4 mt-6 bg-black text-white">
+        <p>&copy; 2025 Football Blog</p>
+    </footer>
+
 </div>
 </body>
 </html>
