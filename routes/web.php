@@ -90,3 +90,7 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact.show')
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 // News by Category
+
+use App\Http\Controllers\FixturesController;
+
+Route::get('/matches', [FixturesController::class, 'index'])->name('matches.index');
