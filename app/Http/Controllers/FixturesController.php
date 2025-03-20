@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Fixture;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; // ✅ Add this line
 
 class FixturesController extends Controller
 {
     public function index()
     {
-        // Get upcoming matches (matches without scores)
-        $upcomingMatches = Fixture::whereNull('home_score')->orderBy('match_date', 'asc')->get();
+        $upcomingMatches = Fixture::where('match_date', '>', now())->orderBy('match_date', 'asc')->get();
+        $pastMatches = Fixture::where('match_date', '<', now())->orderBy('match_date', 'desc')->get();
 
-        return view('fixtures.index', compact('upcomingMatches'));
+        return view('fixtures.index', compact('upcomingMatches', 'pastMatches'));
     }
 }
-
