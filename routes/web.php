@@ -94,3 +94,17 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 use App\Http\Controllers\FixturesController;
 
 Route::get('/matches', [FixturesController::class, 'index'])->name('matches.index');
+Route::get('/matches/{id}', [FixturesController::class, 'show'])->name('fixtures.show');
+
+
+Route::get('/fixtures', [FixturesController::class, 'index'])->name('fixtures.index');
+
+use App\Http\Controllers\PredictionController;
+
+Route::post('/fixtures/{fixture}/predict', [PredictionController::class, 'store'])
+    ->name('fixtures.predict')
+    ->middleware('auth');
+
+Route::get('/fixtures/{fixture}/poll-results', [PredictionController::class, 'showPollResults'])
+    ->name('fixtures.poll-results');
+Route::get('/fixtures/{id}', [FixturesController::class, 'show'])->name('fixtures.show');

@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Fixture;
+use Illuminate\Http\Request;
 
 class FixturesController extends Controller
 {
     public function index()
     {
-        // Get upcoming matches (matches without scores)
-        $upcomingMatches = Fixture::whereNull('home_score')->orderBy('match_date', 'asc')->get();
+        $upcomingMatches = Fixture::where('match_date', '>', now())->orderBy('match_date', 'asc')->get();
+        $pastMatches = Fixture::where('match_date', '<', now())->orderBy('match_date', 'desc')->get();
 
-        return view('fixtures.index', compact('upcomingMatches'));
+        // Debugging: Output the matches
+        //dd($upcomingMatches, $pastMatches);
+
+        return view('fixtures.index', compact('upcomingMatches', 'pastMatches'));
     }
-}
 
+
+
+    public function show($id)
+    {
+        $fixture = Fixture::findOrFail($id);
+        $matchStats = json_decode($fixture->match_statistics, true); // Convert JSON stats to an array
+
+        return view('fixtures.show', compact('fixture', 'matchStats'));
+    }
+
+
+
+
+}

@@ -11,12 +11,16 @@ return new class extends Migration {
             $table->id();
             $table->string('home_team');
             $table->string('away_team');
-            $table->string('home_team_logo');
-            $table->string('away_team_logo');
+            $table->string('home_team_logo')->nullable(); // ✅ Make nullable to prevent errors
+            $table->string('away_team_logo')->nullable(); // ✅ Make nullable to prevent errors
             $table->dateTime('match_date');
             $table->string('venue');
+            $table->integer('home_score')->nullable();
+            $table->integer('away_score')->nullable();
+            $table->text('match_summary')->nullable();
             $table->timestamps();
         });
+
     }
 
     public function down()
