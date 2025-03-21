@@ -98,3 +98,12 @@ Route::get('/matches/{id}', [FixturesController::class, 'show'])->name('fixtures
 
 
 Route::get('/fixtures', [FixturesController::class, 'index'])->name('fixtures.index');
+
+use App\Http\Controllers\PredictionController;
+
+Route::post('/fixtures/{fixture}/predict', [PredictionController::class, 'store'])
+    ->name('fixtures.predict')
+    ->middleware('auth');
+
+Route::get('/fixtures/{fixture}/poll-results', [PredictionController::class, 'showPollResults'])
+    ->name('fixtures.poll-results');
