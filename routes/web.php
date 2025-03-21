@@ -107,3 +107,4 @@ Route::post('/fixtures/{fixture}/predict', [PredictionController::class, 'store'
 
 Route::get('/fixtures/{fixture}/poll-results', [PredictionController::class, 'showPollResults'])
     ->name('fixtures.poll-results');
+Route::get('/fixtures/{id}', [FixturesController::class, 'show'])->name('fixtures.show');
