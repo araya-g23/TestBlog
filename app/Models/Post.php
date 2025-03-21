@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,10 +7,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory;
-    use Sluggable;
+    use HasFactory, Sluggable;
 
-    protected $fillable = ['title', 'slug', 'description', 'image_path', 'user_id'];
+    protected $fillable = [
+        'title', 'description', 'slug', 'image', 'user_id'
+    ];
 
     public function user()
     {
@@ -20,10 +20,6 @@ class Post extends Model
 
     public function sluggable(): array
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        return ['slug' => ['source' => 'title']];
     }
 }

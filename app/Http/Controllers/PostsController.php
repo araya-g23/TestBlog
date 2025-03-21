@@ -1,132 +1,112 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\Match;
+use App\Models\Team;
 
 class PostsController extends Controller
 {
- 
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('blog.index')
-            ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
+        $posts = Post::latest()->take(3)->get(); // Get latest 3 posts
+//        $matches = Match::orderBy('date', 'asc')->take(5)->get(); // Get upcoming matches
+//        $teams = Team::all(); // Get all teams
+        return view('home', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function allNews()
+    {
+        $posts = Post::latest()->paginate(10); // Get all posts with pagination
+        return view('blog.index', compact('posts'));
+    }
+
     public function create()
     {
         return view('blog.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
-
-        $request->image->move(public_path('images'), $newImageName);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public'); // Saves in storage/app/public/uploads
+        } else {
+            $imagePath = null;
+        }
 
         Post::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
+            'title' => $request->title,
+            'description' => $request->description,
             'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-            'image_path' => $newImageName,
-            'user_id' => auth()->user()->id
+            'image' => $imagePath,
+            'user_id' => Auth::id(),
         ]);
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been added!');
+        return redirect()->route('blog.index')->with('success', 'Post created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug)
+    public function show($id)
     {
-        return view('blog.show')
-            ->with('post', Post::where('slug', $slug)->first());
+        $post = Post::findOrFail($id);
+        return view('blog.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($slug)
-    {
-        return view('blog.edit')
-            ->with('post', Post::where('slug', $slug)->first());
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $slug)
+    public function edit(Post $post)
     {
+        if (Auth::id() !== $post->user_id) {
+            abort(403, 'Unauthorized Action');
+        }
+        return view('blog.edit', compact('post'));    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|max:2048', // Ensure image is valid
         ]);
 
-        Post::where('slug', $slug)
-            ->update([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-                'user_id' => auth()->user()->id
-            ]);
+        $post->title = $request->title;
+        $post->description = $request->description;
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been updated!');
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $post->image = $path;
+        }
+
+        $post->save();
+
+        // Redirect back to the news page after update
+        return redirect()->route('blog.index')->with('success', 'Post updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($slug)
+
+
+    public function destroy(Post $post)
     {
-        $post = Post::where('slug', $slug);
+        if (Auth::id() !== $post->user_id) {
+            abort(403, 'Unauthorized Action');
+        }
+
         $post->delete();
-
-        return redirect('/blog')
-            ->with('message', 'Your post has been deleted!');
+        return redirect()->route('blog.index')->with('success', 'Post deleted successfully.');
     }
-}
 
+}

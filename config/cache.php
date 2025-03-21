@@ -9,7 +9,7 @@ return [
     | Default Cache Store
     |--------------------------------------------------------------------------
     |
-    | This option controls the default cache connection that gets used while
+    | This option controls the default cache-old connection that gets used while
     | using this caching library. This connection is used when another is
     | not explicitly specified when executing a given caching function.
     |
@@ -22,9 +22,9 @@ return [
     | Cache Stores
     |--------------------------------------------------------------------------
     |
-    | Here you may define all of the cache "stores" for your application as
+    | Here you may define all of the cache-old "stores" for your application as
     | well as their drivers. You may even define multiple stores for the
-    | same cache driver to group types of items stored in your caches.
+    | same cache-old driver to group types of items stored in your caches.
     |
     | Supported drivers: "apc", "array", "database", "file",
     |            "memcached", "redis", "dynamodb", "null"
@@ -44,14 +44,14 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'table' => 'cache',
+            'table' => 'cache-old',
             'connection' => null,
             'lock_connection' => null,
         ],
 
         'file' => [
             'driver' => 'file',
-            'path' => storage_path('framework/cache/data'),
+            'path' => storage_path('framework/cache-old/data'),
         ],
 
         'memcached' => [
@@ -75,7 +75,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'cache',
+            'connection' => 'cache-old',
             'lock_connection' => 'default',
         ],
 
@@ -84,7 +84,7 @@ return [
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
+            'table' => env('DYNAMODB_CACHE_TABLE', 'cache-old'),
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
@@ -96,7 +96,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | When utilizing a RAM based store such as APC or Memcached, there might
-    | be other applications utilizing the same cache. So, we'll specify a
+    | be other applications utilizing the same cache-old. So, we'll specify a
     | value to get prefixed to all our keys so we can avoid collisions.
     |
     */
