@@ -94,3 +94,7 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 use App\Http\Controllers\FixturesController;
 
 Route::get('/matches', [FixturesController::class, 'index'])->name('matches.index');
+Route::get('/matches/{id}', [FixturesController::class, 'show'])->name('fixtures.show');
+
+
+Route::get('/fixtures', [FixturesController::class, 'index'])->name('fixtures.index');
