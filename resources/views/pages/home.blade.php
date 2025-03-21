@@ -28,16 +28,26 @@
 
         <!-- ⚽ Upcoming Matches -->
         <section class="mb-10">
-            <h2 class="text-2xl font-semibold mb-4">⚽ Upcoming Matches</h2>
-            <div class="bg-white shadow-md p-4 rounded-lg">
-                @foreach($matches as $match)
-                    <p class="text-gray-800">
-                        <strong>{{ $match->homeTeam->name }}</strong> vs
-                        <strong>{{ $match->awayTeam->name }}</strong> -
-                        <span class="text-gray-600">{{ $match->date }}</span>
-                    </p>
-                @endforeach
-            </div>
+            @if($upcomingMatches->count() > 0)
+                <h2 class="text-2xl font-bold flex items-center">
+                    ⚽ Upcoming Matches
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach($upcomingMatches as $match)
+                        <div class="bg-white shadow-md rounded-lg p-4 text-center">
+                            <h3 class="font-bold">{{ $match->home_team }} VS {{ $match->away_team }}</h3>
+                            <p class="text-gray-600">{{ \Carbon\Carbon::parse($match->match_date)->format('D, d M Y - h:i A') }}</p>
+                            <p class="font-semibold">{{ $match->venue }}</p>
+                            <a href="{{ route('fixtures.show', $match->id) }}" class="text-blue-500 hover:underline mt-2 block">
+                                View Match Details
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-gray-500">No upcoming matches available.</p>
+            @endif
+
         </section>
 
         <!-- 🏆 Top Teams -->
