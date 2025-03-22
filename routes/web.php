@@ -110,3 +110,8 @@ Route::post('/fixtures/{fixture}/predict', [PredictionController::class, 'store'
 Route::get('/fixtures/{fixture}/poll-results', [PredictionController::class, 'showPollResults'])
     ->name('fixtures.poll-results');
 Route::get('/fixtures/{id}', [FixturesController::class, 'show'])->name('fixtures.show');
+
+Route::post('/match/{match}/vote', [VoteController::class, 'store'])->name('vote.player')->middleware('auth');
+
+
+Route::post('/fixtures/{fixture}/vote', [FixturesController::class, 'vote'])->name('player.vote')->middleware('auth');
