@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/teams/{id}/edit', [TeamController::class, 'edit'])->name('teams.edit');
     Route::put('/teams/{id}', [TeamController::class, 'update'])->name('teams.update');
     Route::delete('/teams/{id}', [TeamController::class, 'destroy'])->name('teams.destroy');
+    Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');
+
 });
 
 /**
