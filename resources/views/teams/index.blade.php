@@ -22,14 +22,13 @@
                 <tbody class="text-gray-700">
                 @foreach ($teams as $team)
                     <tr class="hover:bg-gray-100">
+
+
                         <td>
                             <a href="{{ route('teams.show', $team->id) }}" class="text-blue-500 hover:underline">
                                 {{ $team->name }}
                             </a>
-                        </td>
-
-                        <td class="px-4 py-2">{{ $team->name }}</td>
-                        <td class="px-4 py-2">{{ $team->stadium }}</td>
+                        </td>                        <td class="px-4 py-2">{{ $team->stadium }}</td>
                         <td class="px-4 py-2">{{ $team->coach }}</td>
                         <td class="px-4 py-2">{{ $team->founded }}</td>
                         <td class="px-4 py-2">
