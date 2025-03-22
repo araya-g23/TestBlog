@@ -5,6 +5,23 @@
         <h1 class="text-3xl font-bold text-center mb-6">🏆 Welcome to the Football Blog 🏆</h1>
         <p class="text-center text-gray-600 mb-8">Stay updated with the latest football news, upcoming fixtures, and team rankings!</p>
 
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold flex items-center mb-4">⚽ Your Teams</h2>
+
+            @if($yourTeams->count() > 0)
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    @foreach($yourTeams as $team)
+                        <a href="{{ route('teams.show', $team->id) }}" class="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:shadow-lg transition">
+                            <img src="{{ asset('images/' . $team->logo) }}" alt="{{ $team->name }}" class="w-16 h-16 object-cover rounded-full mb-2">
+                            <p class="text-gray-800 font-semibold">{{ $team->name }}</p>
+                        </a>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-gray-500">You haven’t followed any teams yet.</p>
+            @endif
+        </section>
+
         <!-- 🔥 Featured News Section -->
         <section class="mb-10">
             <h2 class="text-2xl font-semibold mb-4">🔥 Latest News</h2>
@@ -29,9 +46,7 @@
         <!-- ⚽ Upcoming Matches -->
         <section class="mb-10">
             @if($upcomingMatches->count() > 0)
-                <h2 class="text-2xl font-bold flex items-center">
-                    ⚽ Upcoming Matches
-                </h2>
+                <h2 class="text-2xl font-bold flex items-center">⚽ Upcoming Matches</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach($upcomingMatches as $match)
                         <div class="bg-white shadow-md rounded-lg p-4 text-center">
@@ -47,8 +62,8 @@
             @else
                 <p class="text-gray-500">No upcoming matches available.</p>
             @endif
-
         </section>
+
 
         <!-- 🏆 Top Teams -->
         <section class="mb-10">

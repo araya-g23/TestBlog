@@ -115,3 +115,9 @@ Route::post('/match/{match}/vote', [VoteController::class, 'store'])->name('vote
 
 
 Route::post('/fixtures/{fixture}/vote', [FixturesController::class, 'vote'])->name('player.vote')->middleware('auth');
+use App\Http\Controllers\TeamFollowController;
+
+Route::middleware('auth')->group(function () {
+    Route::post('/teams/{team}/follow', [TeamFollowController::class, 'follow'])->name('teams.follow');
+    Route::delete('/teams/{team}/unfollow', [TeamFollowController::class, 'unfollow'])->name('teams.unfollow');
+});

@@ -16,6 +16,22 @@
                     <p class="text-gray-600">📅 Founded: {{ $team->founded }}</p>
                 </div>
             </div>
+            @auth
+                @if(auth()->user()->followedTeams->contains($team->id))
+                    <form method="POST" action="{{ route('teams.unfollow', $team->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="bg-red-500 text-white px-4 py-2 rounded mt-4">Unfollow</button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('teams.follow', $team->id) }}">
+                        @csrf
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Follow</button>
+                    </form>
+                @endif
+            @endauth
+
+
 
             {{-- Players table (styled) --}}
             <h2 class="text-2xl font-semibold mt-6">Players</h2>

@@ -48,5 +48,9 @@ class User extends Authenticatable
     public function votes() {
         return $this->hasMany(PlayerMatchVote::class);
     }
+    public function followedTeams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
 
 }

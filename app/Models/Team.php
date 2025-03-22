@@ -36,6 +36,10 @@ class Team extends Model
     {
         return $this->hasMany(Trophy::class);
     }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 
 
 
