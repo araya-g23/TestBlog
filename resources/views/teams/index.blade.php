@@ -33,7 +33,7 @@
                         <td class="px-4 py-2">{{ $team->coach }}</td>
                         <td class="px-4 py-2">{{ $team->founded }}</td>
                         <td class="px-4 py-2">
-                            <img src="{{ asset('images/' . $team->logo) }}" alt="{{ $team->name }}" class="w-10 h-10 object-contain">
+                            <img src="{{ asset('storage/uploads/' . basename($team->logo)) }}" alt="{{ $team->name }}" class="w-10 h-10 object-contain">
                         </td>
                     </tr>
                 @endforeach

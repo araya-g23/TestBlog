@@ -20,35 +20,73 @@
 
     <!-- ✅ Updated Navbar (Matches Other Pages) -->
     <nav class="bg-black text-white p-4">
-        <ul class="flex justify-between items-center">
-            <div class="flex space-x-6">
-                <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
-                <li><a href="{{ route('blog.index') }}" class="hover:underline">All News</a></li>
-                <li><a href="{{ route('teams.index') }}" class="hover:underline">Teams</a></li>
-                <li><a href="{{ route('matches.index') }}" class="hover:underline">Fixtures</a></li>
-                <li><a href="{{ route('contact.show') }}" class="hover:underline">Contact</a></li>
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ route('home') }}" class="text-xl font-bold">⚽ Blog</a>
 
-                @if(Auth::check())
-                    <li><a href="{{ route('blog.create') }}" class="hover:underline text-green-400">Create Post</a></li>
-                @endif
-            </div>
+            <!-- Hamburger -->
+            <button class="md:hidden block" id="navToggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
 
-            <div class="flex space-x-6">
-                @guest
-                    <li><a href="{{ route('login') }}" class="hover:underline">Login</a></li>
-                    <li><a href="{{ route('register') }}" class="hover:underline">Register</a></li>
-                @else
-                    <li><a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a></li>
+            <!-- Nav Links -->
+            <ul id="navMenu" class="hidden md:flex space-x-6 text-white">
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('blog.index') }}">All News</a></li>
+                <li><a href="{{ route('teams.index') }}">Teams</a></li>
+                <li><a href="{{ route('matches.index') }}">Fixtures</a></li>
+                <li><a href="{{ route('contact.show') }}">Contact</a></li>
+
+                @auth
+                    <li><a href="{{ route('blog.create') }}" class="text-green-400">Create Post</a></li>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="hover:underline">Logout</button>
+                            <button type="submit">Logout</button>
                         </form>
                     </li>
-                @endguest
-            </div>
-        </ul>
+                @else
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @endauth
+            </ul>
+        </div>
+
+        <!-- Dropdown Menu (Mobile) -->
+        <div id="mobileMenu" class="md:hidden hidden mt-2 px-4">
+            <ul class="space-y-2">
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('blog.index') }}">All News</a></li>
+                <li><a href="{{ route('teams.index') }}">Teams</a></li>
+                <li><a href="{{ route('matches.index') }}">Fixtures</a></li>
+                <li><a href="{{ route('contact.show') }}">Contact</a></li>
+                @auth
+                    <li><a href="{{ route('blog.create') }}" class="text-green-400">Create Post</a></li>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @endauth
+            </ul>
+        </div>
+
+        <!-- Toggle Script -->
+        <script>
+            document.getElementById('navToggle').addEventListener('click', function () {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        </script>
     </nav>
+
 
     <!-- ✅ Keeps Login Page Design -->
     <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">

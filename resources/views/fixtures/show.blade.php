@@ -32,20 +32,20 @@
                 <form action="{{ route('player.vote', $fixture->id) }}" method="POST" class="mt-2">
                     @csrf
                     <select name="player_id" class="border p-2 rounded w-full">
-                        <optgroup label="{{ $fixture->home_team }}">
-                            @foreach($fixture->players->filter(fn($p) => $p->team->name === $fixture->home_team) as $player)
+                        <optgroup label="{{ $fixture->homeTeam->name ?? 'Home Team' }}">
+                            @foreach($fixture->homeTeam?->players ?? [] as $player)
                                 <option value="{{ $player->id }}">{{ $player->name }} ({{ $player->position }})</option>
                             @endforeach
                         </optgroup>
 
-                        <optgroup label="{{ $fixture->away_team }}">
-                            @foreach($fixture->players->filter(fn($p) => $p->team->name === $fixture->away_team) as $player)
+                        <optgroup label="{{ $fixture->awayTeam->name ?? 'Away Team' }}">
+                            @foreach($fixture->awayTeam?->players ?? [] as $player)
                                 <option value="{{ $player->id }}">{{ $player->name }} ({{ $player->position }})</option>
                             @endforeach
                         </optgroup>
-
 
                     </select>
+
                     <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded">Vote</button>
                 </form>
 

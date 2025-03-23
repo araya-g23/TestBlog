@@ -24,11 +24,13 @@ class FixturesController extends Controller
 
     public function show($id)
     {
-        $fixture = Fixture::with(['players', 'votes'])->findOrFail($id);
+        $fixture = Fixture::with(['homeTeam.players', 'awayTeam.players', 'votes'])->findOrFail($id);
         $matchStats = json_decode($fixture->match_statistics, true);
 
         return view('fixtures.show', compact('fixture', 'matchStats'));
     }
+
+
 
 
     public function vote(Request $request, $matchId)

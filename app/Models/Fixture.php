@@ -20,7 +20,7 @@ class Fixture extends Model
     }
     public function players()
     {
-        return $this->belongsToMany(Player::class); // pivot table required
+        return $this->belongsToMany(Player::class, 'fixture_player'); // pivot table required
     }
     public function homeTeam()
     {
@@ -31,6 +31,9 @@ class Fixture extends Model
     {
         return $this->belongsTo(Team::class, 'away_team_id');
     }
+
+
+
 
 
 

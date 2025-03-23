@@ -17,7 +17,7 @@ class Player extends Model
     }
     public function fixtures()
     {
-        return $this->belongsToMany(Fixture::class);
+        return $this->belongsToMany(Fixture::class, 'fixture_player');
     }
 
 

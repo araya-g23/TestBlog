@@ -12,7 +12,8 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     @foreach($yourTeams as $team)
                         <a href="{{ route('teams.show', $team->id) }}" class="flex flex-col items-center bg-white shadow-md p-4 rounded-lg hover:shadow-lg transition">
-                            <img src="{{ asset('images/' . $team->logo) }}" alt="{{ $team->name }}" class="w-16 h-16 object-cover rounded-full mb-2">
+                            <img src="{{ asset('storage/' . $team->logo) }}" alt="{{ $team->name }}" class="w-10 h-10 object-contain">
+
                             <p class="text-gray-800 font-semibold">{{ $team->name }}</p>
                         </a>
                     @endforeach
@@ -71,7 +72,8 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($teams as $team)
                     <div class="flex flex-col items-center bg-white shadow-md p-4 rounded-lg">
-                        <img src="{{ asset('images/' . $team->logo) }}" alt="{{ $team->name }}" class="w-16 h-16 object-cover">
+                        <img src="{{ asset('storage/' . $team->logo) }}" alt="{{ $team->name }}" class="w-10 h-10 object-contain">
+
                         <p class="text-gray-800 font-semibold mt-2">{{ $team->name }}</p>
                     </div>
                 @endforeach
@@ -80,12 +82,28 @@
 
         <!-- 📸 Latest Images -->
         <section class="mb-10">
-            <h2 class="text-2xl font-semibold mb-4">📸 Latest Images</h2>
-            <div class="flex gap-6">
-                <img src="{{ asset('images/match1.jpg') }}" class="w-40 h-40 object-cover rounded-lg shadow-md">
-                <img src="{{ asset('images/match2.jpg') }}" class="w-40 h-40 object-cover rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 flex items-center">
+                <span class="mr-2">📸</span> Latest Images
+            </h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                @foreach([
+                    ['src' => 'images/pic1.jpg', 'caption' => 'Messi silences the Santiago Bernabéu by holding up his shirt after a last-minute winner in El Clásico.'],
+                    ['src' => 'images/pic2.jpg', 'caption' => 'Iniesta’s extra-time strike gives Spain their first ever FIFA World Cup.'],
+                    ['src' => 'images/pic3.jpg', 'caption' => 'Maradona dribbles past five England players in the 1986 World Cup – a moment etched in football history.'],
+                    ['src' => 'images/pic4.jpeg', 'caption' => 'Casillas stretches a foot to deny Robben a sure goal – a match-defining moment.'],
+                    ['src' => 'images/pic5.jpg', 'caption' => 'A perfect left-footed volley into the top corner – Zizou’s magic on the biggest stage.'],
+                    ['src' => 'images/pic6.jpg', 'caption' => 'A jaw-dropping overhead kick by Ronaldo in the Champions League quarter-final – applauded even by Juve fans.'],
+                    ['src' => 'images/pic 7.jpg', 'caption' => 'Lionel Messi finally lifts the FIFA World Cup trophy, completing his football legacy with Argentina.'],
+                    ['src' => 'images/pic8.jpg', 'caption' => 'United scored two stoppage-time goals to beat Bayern Munich and win the treble in the most dramatic UCL final ever.']
+                ] as $img)
+                    <a href="{{ asset($img['src']) }}" class="glightbox" data-gallery="match-gallery" data-title="{{ $img['caption'] }}">
+                        <img src="{{ asset($img['src']) }}" alt="{{ $img['caption'] }}" class="w-full h-40 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+                    </a>
+                @endforeach
             </div>
         </section>
+
 
         <!-- 📞 Contact Information -->
         <section class="mb-10">
@@ -97,3 +115,12 @@
         </section>
     </div>
 @endsection
+<!-- Include GLightbox CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        GLightbox({ selector: '.glightbox' });
+    });
+</script>
