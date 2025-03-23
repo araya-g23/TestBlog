@@ -1,83 +1,77 @@
-## Laravel 8 Complete Blog
+# ⚽ Football Blog – Laravel 8 Web Application
 
-# ⚽ Football Blog Web Application
+A dynamic Laravel-based football blog platform that enables users to stay updated with the latest football news, match fixtures, team rosters, and interact through features like player voting and following teams.
 
-A dynamic Laravel-based football blog platform that enables users to stay updated with the latest football news, match fixtures, team rosters, and interact with various features such as player of the match voting and team following.
+---
 
 ## 📌 Project Overview
 
-The Football Blog application serves as an all-in-one hub for football fans. It includes features like:
-- 📰 News and blog posts with image upload
-- 🏟️ Team pages with stadium, coach, founding info, and players
-- 🗓️ Fixtures listing (upcoming & past)
-- 🏆 Team trophies display
+The Football Blog application is designed for fans to engage with:
+- 📰 News & blog posts with rich text and images
+- 🏟️ Team profiles (stadium, coach, players, trophies)
+- 🗓️ Fixture slider for upcoming & past matches
 - 🗳️ Player of the Match voting
-- 👤 User registration, login, profile dashboard
-- 📸 Profile picture upload/editing
-- ❤️ Follow/unfollow favorite teams
+- 👤 User authentication and dashboards
+- 📸 Profile picture upload and editing
+- ❤️ Follow/unfollow your favorite teams
 
 ---
 
 ## 🚀 Features
 
-### News & Blog
-- Create, edit, delete, and view detailed blog posts.
-- Each post supports images and large formatted descriptions.
+### 📰 News & Blog
+- Create, edit, delete, and view blog posts
+- Upload images and long-form content
+- Responsive news grid with pagination
 
-### Teams
-- View list of popular football clubs.
-- View individual team details including:
-    - Stadium
-    - Coach
-    - Year founded
+### 🏟️ Teams
+- Browse team pages with:
     - Logo
-    - Players (by position)
-    - Trophies
+    - Coach
+    - Stadium
+    - Founded year
+    - Squad (by position)
+    - Trophy count
 
-### Fixtures
-- Slider-based UI to browse:
-    - Upcoming Matches
-    - Past Results
+### 🗓️ Fixtures
+- Slider-style upcoming and past fixtures
+- View match details, vote Player of the Match
 
-### Dashboard
-- Profile overview (email, joined date).
-- Upload and update profile picture with live preview.
-- Logout button with modern UI.
+### 👤 Dashboard
+- View profile info (name, email, join date)
+- Upload & update profile picture
+- Logout securely
 
-### Authentication
-- Secure Laravel Breeze-based auth.
-- Conditional navbar based on user status (guest/authenticated).
+### 🔐 Authentication
+- Laravel Breeze-based login & register
+- Role-based navbar UI (guest vs logged in)
 
 ---
 
 ## 🛠️ Setup Instructions
 
-1. **Clone the repository**
-   ```bash
-   https://github.com/araya-g23/TestBlog.git
+### 1. Clone the Repository
+```bash
+git clone https://github.com/araya-g23/TestBlog.git
+cd TestBlog
 
-
-## Requirements
-•	PHP 7.3 or higher <br>
-•	Node 12.13.0 or higher <br>
-
-## Usage <br>
-Setting up your development environment on your local machine: <br>
-```
-git clone git@github.com:codewithdary/laravel-8-complete-blog.git
-cd laravel-8-complete-blog
-cp .env.example .env
+Install Dependencies
+````
 composer install
+npm install && npm run dev
+cp .env.example .env
 php artisan key:generate
-php artisan cache:clear && php artisan config:clear
-php artisan serve
+
+
+
 ```
+
 
 ## Before starting <br>
 Create a database <br>
 ```
 mysql
-create database laravelblog;
+CREATE DATABASE football_blog;
 exit;
 ```
 
@@ -95,6 +89,7 @@ Migrate the tables
 ```
 php artisan migrate
 ```
-
-## Contributing
-Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.
+Start the Server
+```
+php artisan serve
+```
