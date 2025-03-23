@@ -93,3 +93,4 @@ Start the Server
 ```
 php artisan serve
 ```
+Visit the application at [http://localhost:8000](http://localhost:8000)
