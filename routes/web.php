@@ -121,3 +121,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/teams/{team}/follow', [TeamFollowController::class, 'follow'])->name('teams.follow');
     Route::delete('/teams/{team}/unfollow', [TeamFollowController::class, 'unfollow'])->name('teams.unfollow');
 });
+
+
+Route::put('/dashboard/profile-picture', [HomeController::class, 'updateProfilePicture'])->name('user.profile-picture.update');

@@ -25,6 +25,20 @@ class HomeController extends Controller
 
         return view('pages.home', compact('posts', 'teams', 'yourTeams', 'upcomingMatches'));
     }
+    public function updateProfilePicture(Request $request)
+    {
+        $request->validate([
+            'profile_picture' => 'image|max:2048'
+        ]);
+
+        $user = auth()->user();
+        $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+        $user->profile_picture = $path;
+        $user->save();
+
+        return back()->with('success', 'Profile picture updated!');
+    }
+
 
 
 
