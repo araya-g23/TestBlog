@@ -83,7 +83,7 @@
         <!-- 📸 Latest Images -->
         <section class="mb-10">
             <h2 class="text-2xl font-semibold mb-4 flex items-center">
-                <span class="mr-2">📸</span> Latest Images
+                <span class="mr-2">📸</span> Iconic Football Moments of All Time Images
             </h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
