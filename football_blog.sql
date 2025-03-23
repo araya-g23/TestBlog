@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2025 at 04:37 PM
+-- Generation Time: Mar 23, 2025 at 06:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,10 +84,10 @@ INSERT INTO `fixtures` (`id`, `home_team_id`, `away_team_id`, `home_team`, `away
 (16, 8, 11, 'Juventus', 'AC Milan', 'uploads/juventus.png', 'uploads/acmilan.png', '2025-04-25 21:00:00', 'Allianz Stadium', NULL, NULL, NULL, NULL, '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
 (17, 12, 13, 'Arsenal', 'Tottenham', 'uploads/arsenal.png', 'uploads/tottenham.png', '2025-04-30 17:30:00', 'Emirates Stadium', NULL, NULL, NULL, NULL, '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
 (18, 1, 5, 'Manchester United', 'Liverpool', 'uploads/manu.png', 'uploads/liverpool.png', '2025-03-15 19:10:00', 'Old Trafford', 2, 1, 'Bruno Fernandes scored the winner.', '{\"possession\": \"55% - 45%\", \"shots_on_target\": \"7 - 5\", \"fouls\": \"10 - 8\", \"corners\": \"5 - 3\", \"top_scorer\": \"Bruno Fernandes\", \"yellow_cards\": \"2 - 1\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
-(19, 0, 0, 'Real Madrid', 'Barcelona', 'uploads/realmadrid.png', 'uploads/barcelona.png', '2025-03-10 20:00:00', 'Santiago Bernabéu', 1, 1, 'Late equalizer from Barcelona.', '{\"possession\": \"60% - 40%\", \"shots_on_target\": \"8 - 6\", \"fouls\": \"12 - 9\", \"corners\": \"4 - 5\", \"top_scorer\": \"Karim Benzema\", \"yellow_cards\": \"1 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
-(20, 0, 0, 'Bayern Munich', 'PSG', 'uploads/bayern.png', 'uploads/psg.png', '2025-03-08 21:30:00', 'Allianz Arena', 3, 2, 'Lewandowski scored a brace.', '{\"possession\": \"50% - 50%\", \"shots_on_target\": \"9 - 8\", \"fouls\": \"14 - 11\", \"corners\": \"6 - 4\", \"top_scorer\": \"Robert Lewandowski\", \"yellow_cards\": \"3 - 2\", \"red_cards\": \"0 - 1\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
-(21, 0, 0, 'Juventus', 'Inter Milan', 'uploads/juventus.png', 'uploads/inter.png', '2025-03-05 19:45:00', 'Allianz Stadium', 2, 1, 'Dybala scored the winning goal.', '{\"possession\": \"48% - 52%\", \"shots_on_target\": \"5 - 6\", \"fouls\": \"11 - 13\", \"corners\": \"3 - 5\", \"top_scorer\": \"Paulo Dybala\", \"yellow_cards\": \"2 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
-(22, 0, 0, 'Arsenal', 'Chelsea', 'uploads/arsenal.png', 'uploads/chelsea.png', '2025-03-01 18:00:00', 'Emirates Stadium', 1, 2, 'Chelsea secured the win with a late goal.', '{\"possession\": \"53% - 47%\", \"shots_on_target\": \"6 - 7\", \"fouls\": \"9 - 10\", \"corners\": \"4 - 4\", \"top_scorer\": \"Mason Mount\", \"yellow_cards\": \"1 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57');
+(19, 3, 4, 'Real Madrid', 'Barcelona', 'uploads/realmadrid.png', 'uploads/barcelona.png', '2025-03-10 20:00:00', 'Santiago Bernabéu', 1, 1, 'Late equalizer from Barcelona.', '{\"possession\": \"60% - 40%\", \"shots_on_target\": \"8 - 6\", \"fouls\": \"12 - 9\", \"corners\": \"4 - 5\", \"top_scorer\": \"Karim Benzema\", \"yellow_cards\": \"1 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
+(20, 7, 9, 'Bayern Munich', 'PSG', 'uploads/bayern.png', 'uploads/psg.png', '2025-03-08 21:30:00', 'Allianz Arena', 3, 2, 'Lewandowski scored a brace.', '{\"possession\": \"50% - 50%\", \"shots_on_target\": \"9 - 8\", \"fouls\": \"14 - 11\", \"corners\": \"6 - 4\", \"top_scorer\": \"Robert Lewandowski\", \"yellow_cards\": \"3 - 2\", \"red_cards\": \"0 - 1\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
+(21, 8, 10, 'Juventus', 'Inter Milan', 'uploads/juventus.png', 'uploads/inter.png', '2025-03-05 19:45:00', 'Allianz Stadium', 2, 1, 'Dybala scored the winning goal.', '{\"possession\": \"48% - 52%\", \"shots_on_target\": \"5 - 6\", \"fouls\": \"11 - 13\", \"corners\": \"3 - 5\", \"top_scorer\": \"Paulo Dybala\", \"yellow_cards\": \"2 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57'),
+(22, 12, 2, 'Arsenal', 'Chelsea', 'uploads/arsenal.png', 'uploads/chelsea.png', '2025-03-01 18:00:00', 'Emirates Stadium', 1, 2, 'Chelsea secured the win with a late goal.', '{\"possession\": \"53% - 47%\", \"shots_on_target\": \"6 - 7\", \"fouls\": \"9 - 10\", \"corners\": \"4 - 4\", \"top_scorer\": \"Mason Mount\", \"yellow_cards\": \"1 - 2\", \"red_cards\": \"0 - 0\"}', '2025-03-21 00:44:57', '2025-03-21 00:44:57');
 
 -- --------------------------------------------------------
 
@@ -467,7 +467,8 @@ CREATE TABLE `predictions` (
 INSERT INTO `predictions` (`id`, `user_id`, `fixture_id`, `prediction`, `created_at`, `updated_at`) VALUES
 (2, 1, 13, 'draw', '2025-03-21 10:12:15', '2025-03-23 14:50:10'),
 (3, 1, 14, 'home_win', '2025-03-21 10:12:31', '2025-03-21 10:12:31'),
-(4, 1, 16, 'home_win', '2025-03-23 02:43:18', '2025-03-23 02:43:18');
+(4, 1, 16, 'home_win', '2025-03-23 02:43:18', '2025-03-23 02:43:18'),
+(5, 1, 15, 'home_win', '2025-03-23 16:38:09', '2025-03-23 16:38:09');
 
 -- --------------------------------------------------------
 
@@ -589,7 +590,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `is_admin`, `profile_picture`) VALUES
 (1, 'Eyob', 'd00270565@student.dkit.ie', NULL, '$2y$10$BD1OxZ7HYNMsSLNVtSipJeo9YZIuqJqvhTupJb.Q8n4MgYGHvx.X.', NULL, '2025-03-19 15:08:40', '2025-03-23 15:23:47', 0, 'profile_pictures/bW66MPnyraTYmGz68UVbquMlXSUXpPv6rnq1HWet.jpg'),
 (2, 'Araya', 'admin@example.com', NULL, '$2y$10$CYHjy1B1iU2Isl4WGKnPgu/yoDKpgjW.iVhE29LnoCfJBfjwXIN/i', NULL, '2025-03-19 16:59:09', '2025-03-19 16:59:09', 0, NULL),
-(3, 'john', 'jhon@gmail.com', NULL, '$2y$10$mnxt1iP7GdhUNiuWOQAIOuGUu5vMFdSPB7NunJJLp3jitj2iyYgzy', NULL, '2025-03-23 14:23:06', '2025-03-23 14:23:06', 0, NULL);
+(3, 'john', 'jhon@gmail.com', NULL, '$2y$10$mnxt1iP7GdhUNiuWOQAIOuGUu5vMFdSPB7NunJJLp3jitj2iyYgzy', NULL, '2025-03-23 14:23:06', '2025-03-23 15:49:31', 0, 'profile_pictures/lrQnRYo1iroaoBlfsHuMnwgXsYRsX3AJMjM3hihN.jpg');
 
 --
 -- Indexes for dumped tables
@@ -762,7 +763,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `predictions`
 --
 ALTER TABLE `predictions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `teams`
