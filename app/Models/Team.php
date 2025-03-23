@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Player;
+use App\Models\Trophy;
+
 
 class Team extends Model
 {
@@ -23,4 +26,21 @@ class Team extends Model
 //    {
 //        return $this->hasMany(Match::class);
 //    }
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+
+    public function trophies()
+    {
+        return $this->hasMany(Trophy::class);
+    }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
+
 }

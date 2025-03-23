@@ -28,11 +28,15 @@ class TeamController extends Controller
         return view('teams.index', compact('teams'));
     }
 
+    // TeamController.php
+
     public function show($id)
     {
-        $team = Team::with('players')->findOrFail($id);
+        $team = Team::with(['players', 'trophies'])->findOrFail($id);
+
         return view('teams.show', compact('team'));
     }
+
 
     public function create()
     {
